@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    Ajax 연습(MariaDB)<p/>
+    <button id="btnOk1">대출리스트 출력 1</button>
+    <br>
+    <br>
+    <div id="showData1"></div>
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#btnOk1").on("click", function(){
+                
+                $("#showData1").empty();
+
+                $.ajax({
+                    type:"get",
+                    url:"test",
+                    dataType:"json",
+                    success:function(datas){
+                        // console.log(datas.length);
+                        str = "<table border='1'>";
+                        for(let i=0; i<datas.length; i++){
+                            str += "<tr>"
+                            str += "<td>" + datas[i].no + "</td>"
+                            str += "<td>" + datas[i].m_id + "</td>"
+                            str += "</tr>"
+                        };
+                        str += "</table>";
+                        $("#showData1").append(str);
+
+                    },
+                    error:function(){
+                        $("#showData1").text("test error");
+                    }
+                    
+                });
+
+            });
+        });
+
+    </script>
+</body>
+</html>
